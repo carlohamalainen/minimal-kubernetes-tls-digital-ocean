@@ -272,3 +272,58 @@ I0530 01:13:33.869155       1 controller.go:162] "re-queuing item due to optimis
 E0530 01:13:33.904307       1 controller.go:208] "challenge in work queue no longer exists" err="challenge.acme.cert-manager.io \"letsencrypt-nginx-quote-1-3066565044-3627852778\" not found" logger="cert-manager.challenges"
 
 ```
+
+
+```
+$ kubectl describe certificate letsencrypt-nginx-quote -n backend
+Name:         letsencrypt-nginx-quote
+Namespace:    backend
+Labels:       <none>
+Annotations:  <none>
+API Version:  cert-manager.io/v1
+Kind:         Certificate
+Metadata:
+  Creation Timestamp:  2024-05-30T01:12:11Z
+  Generation:          3
+  Owner References:
+    API Version:           networking.k8s.io/v1
+    Block Owner Deletion:  true
+    Controller:            true
+    Kind:                  Ingress
+    Name:                  ingress-quote
+    UID:                   00000000-0000-0000-0000-000000000000
+  Resource Version:        7805
+  UID:                     00000000-0000-0000-0000-000000000000
+Spec:
+  Dns Names:
+    api.carlo-hamalainen.net
+  Issuer Ref:
+    Group:      cert-manager.io
+    Kind:       ClusterIssuer
+    Name:       letsencrypt-nginx
+  Secret Name:  letsencrypt-nginx-quote
+  Usages:
+    digital signature
+    key encipherment
+Status:
+  Conditions:
+    Last Transition Time:  2024-05-30T01:13:33Z
+    Message:               Certificate is up to date and has not expired
+    Observed Generation:   3
+    Reason:                Ready
+    Status:                True
+    Type:                  Ready
+  Not After:               2024-08-28T00:13:31Z
+  Not Before:              2024-05-30T00:13:32Z
+  Renewal Time:            2024-07-29T00:13:31Z
+  Revision:                1
+Events:
+  Type     Reason         Age                From                                       Message
+  ----     ------         ----               ----                                       -------
+  Normal   Issuing        16m                cert-manager-certificates-trigger          Issuing certificate as Secret does not exist
+  Normal   Generated      16m                cert-manager-certificates-key-manager      Stored new private key in temporary Secret resource "letsencrypt-nginx-quote-g7l2r"
+  Warning  RequestFailed  16m                cert-manager-certificates-request-manager  Failed to create CertificateRequest: certificaterequests.cert-manager.io "letsencrypt-nginx-quote-1" already exists
+  Normal   Requested      16m (x3 over 16m)  cert-manager-certificates-request-manager  Created new CertificateRequest resource "letsencrypt-nginx-quote-1"
+  Normal   Issuing        15m                cert-manager-certificates-issuing          The certificate has been successfully issued
+
+```
