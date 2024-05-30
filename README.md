@@ -47,7 +47,7 @@ kubectl apply -f clusterissuer-letsencrypt-nginx.yaml
 
 
 
-```
+```shell
 $ kubectl get certificates -n backend
 NAME                      READY   SECRET                    AGE
 letsencrypt-nginx-quote   False   letsencrypt-nginx-quote   70s
@@ -58,7 +58,7 @@ letsencrypt-nginx-quote   True    letsencrypt-nginx-quote   96s
 
 ```
 
-```
+```shell
 $ curl https://api.carlo-hamalainen.net
 {
     "server": "meaty-raspberry-jptbx237",
@@ -67,7 +67,7 @@ $ curl https://api.carlo-hamalainen.net
 }
 ```
 
-```
+```shell
 $ kubectl describe certificaterequest letsencrypt-nginx-quote-1 -n backend
 Name:         letsencrypt-nginx-quote-1
 Namespace:    backend
@@ -143,10 +143,8 @@ Events:
   Normal  IssuerNotFound      3m16s  cert-manager-certificaterequests-issuer-ca          Referenced "ClusterIssuer" not found: clusterissuer.cert-manager.io "letsencrypt-nginx" not found
   Normal  IssuerNotFound      3m16s  cert-manager-certificaterequests-issuer-venafi      Referenced "ClusterIssuer" not found: clusterissuer.cert-manager.io "letsencrypt-nginx" not found
   Normal  CertificateIssued   2m35s  cert-manager-certificaterequests-issuer-acme        Certificate fetched from issuer successfully
-```
 
 
-```
 ❯ kubectl -n cert-manager get pods
 NAME                                       READY   STATUS    RESTARTS   AGE
 cert-manager-788887dcf6-5scwt              1/1     Running   0          7m25s
@@ -273,10 +271,6 @@ E0530 01:13:33.868842       1 sync.go:73] "failed to update status" logger="cert
 I0530 01:13:33.869155       1 controller.go:162] "re-queuing item due to optimistic locking on resource" logger="cert-manager.orders" key="backend/letsencrypt-nginx-quote-1-3066565044" error="Operation cannot be fulfilled on orders.acme.cert-manager.io \"letsencrypt-nginx-quote-1-3066565044\": the object has been modified; please apply your changes to the latest version and try again"
 E0530 01:13:33.904307       1 controller.go:208] "challenge in work queue no longer exists" err="challenge.acme.cert-manager.io \"letsencrypt-nginx-quote-1-3066565044-3627852778\" not found" logger="cert-manager.challenges"
 
-```
-
-
-```
 $ kubectl describe certificate letsencrypt-nginx-quote -n backend
 Name:         letsencrypt-nginx-quote
 Namespace:    backend
