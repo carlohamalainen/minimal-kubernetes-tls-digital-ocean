@@ -65,6 +65,7 @@ $ curl https://api.carlo-hamalainen.net
     "quote": "A principal idea is omnipresent, much like candy.",
     "time": "2024-05-30T01:14:06.094422251Z"
 }
+```
 
 ```
 $ kubectl describe certificaterequest letsencrypt-nginx-quote-1 -n backend
