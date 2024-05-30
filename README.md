@@ -145,6 +145,7 @@ Events:
 ```
 
 
+```
 ❯ kubectl -n cert-manager get pods
 NAME                                       READY   STATUS    RESTARTS   AGE
 cert-manager-788887dcf6-5scwt              1/1     Running   0          7m25s
