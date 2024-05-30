@@ -1,0 +1,4 @@
+.envrc
+k8s-kubeconfig.yaml
+clusterissuer-letsencrypt-nginx-real.yaml
+quote_host-real.yaml

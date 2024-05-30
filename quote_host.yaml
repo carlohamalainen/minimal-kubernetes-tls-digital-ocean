@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-quote
+  namespace: backend
+  annotations:
+    # cert-manager.io/issuer: letsencrypt-nginx
+    cert-manager.io/cluster-issuer: letsencrypt-nginx
+spec:
+  tls:
+    - hosts:
+      - api.example.com # CHANGE THIS
+      secretName: letsencrypt-nginx-quote
+  rules:
+    - host: api.example.com # CHANGE THIS
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: quote
+                port:
+                  number: 80
+  ingressClassName: nginx
